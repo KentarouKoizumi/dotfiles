@@ -16,4 +16,4 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-PS1='\n\e[32m\u@\h\e[0m:\e[36m\W \n\e[33m[\t] \e[0m\$ '
+PS1='\n\e[32m\u@\h\e[0m:\e[36m\w \n\e[33m[\t] \e[0m\$ '

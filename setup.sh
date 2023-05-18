@@ -14,6 +14,7 @@ link_to_homedir(){
   if [[ "$HOME" != "$script_dir" ]];then
     for f in $script_dir/.??*; do
       [[ `basename $f` == ".git" ]] && continue
+      [[ `basename $f` == ".gitignore" ]] && continue
       if [[ -L "$HOME/`basename $f`" ]];then
         command rm -f "$HOME/`basename $f`"
       fi
