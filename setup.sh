@@ -10,7 +10,6 @@ link_to_homedir(){
   fi
 
   local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-  echo "$script_dir"
   if [[ "$HOME" != "$script_dir" ]];then
     for f in $script_dir/.??*; do
       [[ `basename $f` == ".git" ]] && continue
@@ -25,6 +24,15 @@ link_to_homedir(){
       command echo "$f"
       command ln -snf $f $HOME
     done
+    command echo "dotfiles are completely installed."
+    command echo "plese run the below command to install vim-plug"
+    command echo ""
+    command echo "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    command echo ""
+    command echo "and the below command in vim to install plugins"
+    command echo ""
+    command echo ":PlugInstall"
+    command echo ""
   else
     command echo "same install src dest"
   fi
