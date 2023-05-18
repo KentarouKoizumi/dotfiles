@@ -32,5 +32,46 @@ set number
 colorscheme molokai
 let g:molokai_original=1
 set background=dark
+set termguicolors
 
 set statusline=%F%m%h%w\ %=%<[ENC=%{&fenc!=''?$fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ [POS=%l/%L(%02v)]
+
+""""""""""""""""""""""""""""""
+" 最後のカーソル位置を復元する
+""""""""""""""""""""""""""""""
+if has("autocmd")
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+endif
+""""""""""""""""""""""""""""""
+
+call plug#begin('~/.vim/plugged')
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+call plug#end()
+let g:indent_guides_enable_on_vim_startup=1
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme' : 'wombat',
+      \ 'active':{
+      \   'left': [ [ 'mode', 'paste',],
+      \             [ 'readonly', 'gitbranch', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+      \ },
+      \ 'component': {
+      \   'charvaluehex': '0x%B',
+      \   'lineinfo': '%l[%L]:%c',
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
+
+

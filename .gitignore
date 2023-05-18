@@ -1,0 +1,11 @@
+/*
+/.**
+
+
+!/.bashrc
+!/.vimrc
+!/.vim
+/.vim/plugged/**
+!/Dockerfile
+
+!.gitignore
