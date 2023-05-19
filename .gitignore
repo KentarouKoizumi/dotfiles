@@ -7,5 +7,6 @@
 !/.vim
 /.vim/plugged/**
 !/Dockerfile
+!/README.md
 
 !.gitignore
