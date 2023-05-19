@@ -52,6 +52,8 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
+Plug 'dense-analysis/ale'
+Plug 'maximbaz/lightline-ale'
 call plug#end()
 let g:indent_guides_enable_on_vim_startup=1
 set noshowmode
@@ -60,7 +62,8 @@ let g:lightline = {
       \ 'active':{
       \   'left': [ [ 'mode', 'paste',],
       \             [ 'readonly', 'gitbranch', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
+      \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+      \              [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
       \ },
@@ -72,6 +75,18 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
-
-
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
 
