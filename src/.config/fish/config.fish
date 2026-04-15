@@ -57,4 +57,5 @@ abbr rbd 'git fetch origin develop && git rebase origin/develop'
 abbr g-skip  "git update-index --skip-worktree"
 abbr g-unskip "git update-index --no-skip-worktree"
 abbr g-skip-ls "git ls-files -v | grep '^S' | cut -c3-"
+abbr rmzone 'find . -type f -name "*Zone.Identifier" -delete'
 
