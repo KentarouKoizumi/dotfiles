@@ -7,9 +7,14 @@
   home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
+    git
     neovim
     nixfmt
     ripgrep
+    zellij
+    yazi
+    lazygit
+    mise
   ];
 
   home.file = {
