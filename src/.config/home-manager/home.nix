@@ -73,4 +73,18 @@
       exp = "explorer.exe .";
     };
   };
+
+  programs.bash = {
+    enable = true;
+
+    initExtra = ''
+      if [[ $- == *i* ]] \
+        && [[ -z "$BASH_EXECUTION_STRING" ]] \
+        && [[ -z "$INSIDE_FISH" ]]
+      then
+        export INSIDE_FISH=1
+        exec ${pkgs.fish}/bin/fish
+      fi
+    '';
+  };
 }
