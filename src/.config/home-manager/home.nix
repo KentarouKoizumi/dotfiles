@@ -1,76 +1,76 @@
 { config, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "ke-koizumi";
   home.homeDirectory = "/home/ke-koizumi";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.11"; # Please read the comment before changing.
+  home.stateVersion = "25.11";
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+  home.packages = with pkgs; [
+    neovim
+    nixfmt
+    ripgrep
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/ke-koizumi/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
+    BUN_INSTALL = "$HOME/.bun";
     # EDITOR = "emacs";
   };
 
-  # Let Home Manager install and manage itself.
+  home.sessionPath = [
+    "$HOME/.bun/bin"
+  ];
+
   programs.home-manager.enable = true;
+
+  programs.fish = {
+    enable = true;
+
+    plugins = [
+      {
+        name = "tide";
+        src = pkgs.fishPlugins.tide.src;
+      }
+      {
+        name = "z";
+        src = pkgs.fishPlugins.z.src;
+      }
+    ];
+
+    interactiveShellInit = ''
+      set -g fish_key_bindings fish_vi_key_bindings
+      set -g fish_sequence_key_delay_ms 200
+    '';
+
+    functions = {
+      fish_user_key_bindings = ''
+        # ノーマル(=command)モード: yy / Y で行コピーをクリップボードへ
+        bind -M default yy fish_clipboard_copy
+        bind -M default Y fish_clipboard_copy
+
+        # ビジュアルモード: 選択範囲を y でクリップボードへ
+        bind -M visual y fish_clipboard_copy
+
+        # ノーマル(=command)モード: p でクリップボードから貼り付け
+        bind -M default p fish_clipboard_paste
+
+        # insert mode: jj で normal mode へ戻る
+        bind -M insert -m default jj cancel repaint-mode
+      '';
+    };
+
+    shellAbbrs = {
+      ch = "sudo chown $USER -R .";
+      chm = "sudo chmod 777 -R .";
+      rbd = "git fetch origin develop && git rebase origin/develop";
+      g-skip = "git update-index --skip-worktree";
+      g-unskip = "git update-index --no-skip-worktree";
+      g-skip-ls = "git ls-files -v | grep '^S' | cut -c3-";
+      rmzone = "find . -type f -name \"*Zone.Identifier\" -delete";
+      exp = "explorer.exe .";
+    };
+  };
 }
