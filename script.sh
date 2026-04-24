@@ -36,5 +36,4 @@ link_path() {
 }
 
 link_path ".config/nvim"
-link_path ".config/fish"
 link_path ".config/home-manager"
