@@ -37,6 +37,7 @@ return {
                                 astro = { "biome-check", "oxfmt", stop_after_first = true },
                                 json = { "biome-check", "oxfmt", stop_after_first = true },
                                 jsonc = { "biome-check", "oxfmt", stop_after_first = true },
+                                nix = { "nixfmt" },
                         },
 
                         format_on_save = {
