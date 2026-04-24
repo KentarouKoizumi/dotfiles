@@ -5,8 +5,8 @@ return {
   },
 
   keys = {
-    { "<C-h>", "<Cmd>NvimTreeFocus<CR>", desc = "ファイルツリーを開く" },
-    { "<C-d>", "<Cmd>NvimTreeToggle<CR>", desc = "ファイルツリーの表示/非表示" },
+    { "<C-h>", "<Cmd>NvimTreeFocus<CR>", desc = "ファイルツリー: フォーカスを移す" },
+    { "<C-d>", "<Cmd>NvimTreeToggle<CR>", desc = "ファイルツリー: 開閉を切り替える" },
   },
 
   init = function()
@@ -48,7 +48,7 @@ return {
 
       api.map.on_attach.default(bufnr)
 
-      vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
+      vim.keymap.set("n", "l", api.node.open.edit, opts("ファイルまたはディレクトリを開く"))
     end,
   },
 }

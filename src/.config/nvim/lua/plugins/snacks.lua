@@ -13,7 +13,7 @@ return {
                                 Snacks.picker.files()
                         end,
                         mode = "n",
-                        desc = "Find Files",
+                        desc = "検索: ファイルを探して開く",
                 },
                 {
                         "<Leader>fg",
@@ -21,7 +21,7 @@ return {
                                 Snacks.picker.grep()
                         end,
                         mode = "n",
-                        desc = "Live Grep",
+                        desc = "検索: プロジェクト内を文字列検索",
                 },
                 {
                         "<Leader>fb",
@@ -29,7 +29,7 @@ return {
                                 Snacks.picker.buffers()
                         end,
                         mode = "n",
-                        desc = "Find Buffers",
+                        desc = "検索: バッファを切り替える",
                 },
                 {
                         "<Leader>fh",
@@ -37,7 +37,7 @@ return {
                                 Snacks.picker.help()
                         end,
                         mode = "n",
-                        desc = "Find Help Tags",
+                        desc = "検索: ヘルプタグを探す",
                 },
                 {
                         "<Leader>gg",
@@ -45,7 +45,7 @@ return {
                                 Snacks.lazygit()
                         end,
                         mode = "n",
-                        desc = "lazygit",
+                        desc = "Git: lazygit を開く",
                 },
         },
 }

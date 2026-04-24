@@ -18,6 +18,7 @@ return {
                                 "ts_ls",
                                 "tailwindcss",
                                 "csharp_ls",
+                                "docker_compose_language_service",
                         },
                         automatic_enable = true,
                 },
@@ -43,37 +44,42 @@ return {
                         vim.api.nvim_create_autocmd("LspAttach", {
                                 callback = function(args)
                                         local opts = { buffer = args.buf, silent = true }
+                                        local function map(mode, lhs, rhs, desc)
+                                                vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", opts, {
+                                                        desc = desc,
+                                                }))
+                                        end
 
                                         -- Snacks の picker を使うと候補一覧つきで飛べる
-                                        vim.keymap.set("n", "gd", function()
+                                        map("n", "gd", function()
                                                 Snacks.picker.lsp_definitions()
-                                        end, opts)
+                                        end, "LSP: 定義を一覧表示")
 
-                                        vim.keymap.set("n", "gr", function()
+                                        map("n", "gr", function()
                                                 Snacks.picker.lsp_references()
-                                        end, opts)
+                                        end, "LSP: 参照箇所を一覧表示")
 
-                                        vim.keymap.set("n", "gI", function()
+                                        map("n", "gI", function()
                                                 Snacks.picker.lsp_implementations()
-                                        end, opts)
+                                        end, "LSP: 実装を一覧表示")
 
-                                        vim.keymap.set("n", "gy", function()
+                                        map("n", "gy", function()
                                                 Snacks.picker.lsp_type_definitions()
-                                        end, opts)
+                                        end, "LSP: 型定義を一覧表示")
 
                                         -- これは単純ジャンプのままで十分
-                                        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                                        map("n", "gD", vim.lsp.buf.declaration, "LSP: 宣言へ移動")
 
                                         -- これは標準 LSP のままでOK
-                                        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                                        vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, opts)
-                                        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-                                        vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+                                        map("n", "K", vim.lsp.buf.hover, "LSP: ホバー情報を表示")
+                                        map("n", "gK", vim.lsp.buf.signature_help, "LSP: シグネチャヘルプを表示")
+                                        map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: シンボル名を変更")
+                                        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "LSP: コードアクションを表示")
 
                                         -- diagnostics
-                                        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-                                        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-                                        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
+                                        map("n", "[d", vim.diagnostic.goto_prev, "診断: 前の項目へ移動")
+                                        map("n", "]d", vim.diagnostic.goto_next, "診断: 次の項目へ移動")
+                                        map("n", "<leader>e", vim.diagnostic.open_float, "診断: カーソル位置の詳細を表示")
                                 end,
                         })
 
@@ -137,6 +143,7 @@ return {
                         vim.lsp.enable("ts_ls")
                         vim.lsp.enable("tailwindcss")
                         vim.lsp.enable("csharp_ls")
+                        vim.lsp.enable("docker_compose_language_service")
                         vim.lsp.enable("oxlint")
                         vim.lsp.enable("oxfmt")
                 end,

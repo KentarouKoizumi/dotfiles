@@ -3,6 +3,13 @@ require("config.lazy")
 require("config.options")
 require("config.keymaps")
 
+vim.filetype.add({
+  filename = {
+    ["compose.yaml"] = "yaml.docker-compose",
+    ["compose.yml"] = "yaml.docker-compose",
+  },
+})
+
 vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "TextChangedI" }, {
   callback = function(args)
     local buf = args.buf
