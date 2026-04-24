@@ -2,25 +2,6 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-if test -f ~/.env
-    while read -l line
-        set line (string trim $line)
-        if test -z "$line"
-            continue
-        end
-        if string match -q -r '^#' -- $line
-            continue
-        end
-        set key_val (string split -m 1 '=' -- $line)
-        if test (count $key_val) -lt 2
-            continue
-        end
-        set key $key_val[1]
-        set value $key_val[2]
-        set -gx $key $value
-    end <~/.env
-end
-
 function fish_user_key_bindings
     if test "$__fish_active_key_bindings" = fish_vi_key_bindings
         bind --mode insert --sets-mode default jj repaint
@@ -47,10 +28,6 @@ function fish_user_key_bindings
 
     bind -M insert -m default jj cancel repaint-mode
 end
-
-fish_add_path /opt/nvim-linux-x86_64/bin
-
-set EDITOR nvim
 
 ## alias
 abbr ch sudo chown $USER -R .
