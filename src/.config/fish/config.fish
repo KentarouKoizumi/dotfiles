@@ -50,12 +50,14 @@ end
 
 fish_add_path /opt/nvim-linux-x86_64/bin
 
+set EDITOR nvim
+
 ## alias
-abbr ch sudo chown ke-koizumi -R .
+abbr ch sudo chown $USER -R .
 abbr chm sudo chmod 777 -R .
 abbr rbd 'git fetch origin develop && git rebase origin/develop'
 abbr g-skip  "git update-index --skip-worktree"
 abbr g-unskip "git update-index --no-skip-worktree"
 abbr g-skip-ls "git ls-files -v | grep '^S' | cut -c3-"
 abbr rmzone 'find . -type f -name "*Zone.Identifier" -delete'
-
+abbr exp "explorer.exe ."
