@@ -15,6 +15,10 @@
     yazi
     lazygit
     mise
+    fzf
+    inotify-tools
+
+    dotnet-sdk_10
 
     direnv
     nix-direnv
@@ -50,6 +54,8 @@
 
     interactiveShellInit = ''
       eval (direnv hook fish)
+
+      source "$HOME/.vite-plus/env.fish"
 
       set -g fish_key_bindings fish_vi_key_bindings
       set -g fish_sequence_key_delay_ms 200
@@ -88,11 +94,11 @@
     enable = true;
 
     initExtra = ''
+
       if [[ $- == *i* ]] \
         && [[ -z "$BASH_EXECUTION_STRING" ]] \
-        && [[ -z "$INSIDE_FISH" ]]
+        && [[ "$(ps -p "$PPID" -o comm=)" != "fish" ]]
       then
-        export INSIDE_FISH=1
         exec ${pkgs.fish}/bin/fish
       fi
     '';
