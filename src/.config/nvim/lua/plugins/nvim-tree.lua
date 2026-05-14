@@ -33,6 +33,30 @@ return {
     filters = {
       git_ignored = false,
     },
+    -- LSP / vim.diagnostic のエラー・警告を nvim-tree に表示
+    diagnostics = {
+      enable = true,
+
+      -- ディレクトリにも子要素の診断情報を表示
+      show_on_dirs = true,
+
+      -- 開いているディレクトリにも表示
+      show_on_open_dirs = true,
+
+      -- 表示する severity の範囲
+      severity = {
+        min = vim.diagnostic.severity.WARN,
+        max = vim.diagnostic.severity.ERROR,
+      },
+
+      -- 好みで変更可能
+      icons = {
+        error = "",
+        warning = "",
+        info = "",
+        hint = "󰌵",
+      },
+    },
     on_attach = function(bufnr)
       local api = require("nvim-tree.api")
 
