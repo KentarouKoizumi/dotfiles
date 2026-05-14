@@ -15,3 +15,14 @@ vim.opt.listchars = {
   trail = "•",
   nbsp = "␣",
 }
+
+vim.opt.undofile = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.updatetime = 250
+vim.opt.inccommand = "split"
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+vim.opt.cursorline = true
