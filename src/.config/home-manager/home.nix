@@ -16,6 +16,8 @@
     lazygit
     mise
     fzf
+    tree-sitter
+
     inotify-tools
 
     dotnet-sdk_10
