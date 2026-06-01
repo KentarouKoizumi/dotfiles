@@ -17,6 +17,9 @@
     mise
     fzf
     tree-sitter
+    gh
+    marp-cli
+    jq
 
     inotify-tools
 
@@ -61,6 +64,7 @@
 
       set -g fish_key_bindings fish_vi_key_bindings
       set -g fish_sequence_key_delay_ms 200
+      set -x PATH $HOME/.tfenv/bin $PATH
     '';
 
     functions = {
@@ -89,6 +93,8 @@
       g-skip-ls = "git ls-files -v | grep '^S' | cut -c3-";
       rmzone = "find . -type f -name \"*Zone.Identifier\" -delete";
       exp = "explorer.exe .";
+      sgc = "zellij --layout sgc attach --create sgc";
+      zellij-kill = "zellij kill-all-sessions -y";
     };
   };
 
