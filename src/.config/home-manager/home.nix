@@ -96,6 +96,7 @@
       exp = "explorer.exe .";
       sgc = "zellij --layout sgc attach --create sgc";
       zellij-kill = "zellij kill-all-sessions -y";
+      zellij-delete = "zellij delete-all-sessions -y";
     };
   };
 
