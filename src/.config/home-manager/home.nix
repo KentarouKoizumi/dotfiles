@@ -20,6 +20,7 @@
     gh
     marp-cli
     jq
+    xdg-utils
 
     inotify-tools
 
