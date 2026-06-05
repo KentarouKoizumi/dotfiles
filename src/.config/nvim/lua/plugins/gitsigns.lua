@@ -52,6 +52,19 @@ return {
 
       map("n", "<leader>hd", gitsigns.diffthis, { desc = "Git Hunk: 現在ファイルの差分を開く" })
 
+      map("n", "<leader>hc", function()
+        vim.cmd("diffoff!")
+
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          local name = vim.api.nvim_buf_get_name(buf)
+
+          if name:match("^gitsigns://") then
+            vim.api.nvim_win_close(win, true)
+          end
+        end
+      end, { desc = "Git Hunk: 差分を閉じる" })
+
       map("n", "<leader>hD", function()
         gitsigns.diffthis("~")
       end, { desc = "Git Hunk: 直前コミットとの差分を開く" })
