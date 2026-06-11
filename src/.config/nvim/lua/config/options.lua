@@ -26,3 +26,5 @@ vim.opt.inccommand = "split"
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.cursorline = true
+
+vim.o.winborder = "rounded"
