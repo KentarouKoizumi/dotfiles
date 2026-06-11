@@ -55,6 +55,11 @@ return {
             }))
           end
 
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.server_capabilities.codeLensProvider then
+            vim.lsp.codelens.enable(true, { bufnr = args.buf })
+          end
+
           -- Snacks の picker を使うと候補一覧つきで飛べる
           map("n", "gd", function()
             Snacks.picker.lsp_definitions()
@@ -121,6 +126,16 @@ return {
 
       vim.lsp.config("ts_ls", {
         capabilities = capabilities,
+        settings = {
+          typescript = {
+            implementationsCodeLens = { enabled = true },
+            referencesCodeLens = { enabled = true },
+          },
+          javascript = {
+            implementationsCodeLens = { enabled = true },
+            referencesCodeLens = { enabled = true },
+          },
+        },
       })
 
       vim.lsp.config("tailwindcss", {
