@@ -22,6 +22,7 @@
     jq
     go-task
     xdg-utils
+    uv
 
     inotify-tools
 
