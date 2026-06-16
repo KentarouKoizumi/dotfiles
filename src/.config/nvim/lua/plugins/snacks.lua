@@ -3,7 +3,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    picker = { enabled = true },
     notifier = { enabled = true },
     -- words = {
     --   enabled = true,
@@ -30,6 +29,19 @@ return {
           -- or leave it empty to use the default settings
         }
       }
+    },
+    lazygit = {
+      config = {
+        os = {
+          editPreset = "nvim-remote",
+          edit =
+          '[ -z "$NVIM" ] && nvim -- {{filename}} || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote-tab {{filename}})',
+          editAtLine =
+          '[ -z "$NVIM" ] && nvim +{{line}} -- {{filename}} || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote-tab {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}")',
+          openDirInEditor =
+          '[ -z "$NVIM" ] && nvim -- {{dir}} || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote-tab {{dir}})',
+        },
+      },
     },
   },
   keys = {
