@@ -73,6 +73,8 @@ return {
       api.map.on_attach.default(bufnr)
 
       vim.keymap.set("n", "l", api.node.open.edit, opts("ファイルまたはディレクトリを開く"))
+      vim.keymap.set("n", "O", api.tree.change_root_to_node, opts("CD"))
+      vim.keymap.set("n", "-", api.tree.change_root_to_parent, opts("Up"))
     end,
   },
 }
