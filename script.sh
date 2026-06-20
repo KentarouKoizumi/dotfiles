@@ -37,3 +37,4 @@ link_path() {
 
 link_path ".config/nvim"
 link_path ".config/home-manager"
+link_path ".tmux.conf"
