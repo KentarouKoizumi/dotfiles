@@ -158,6 +158,13 @@ return {
           run = "onSave",
         },
       })
+      vim.lsp.config("terraformls", {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config("tflint", {
+        capabilities = capabilities,
+      })
 
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("ts_ls")
@@ -166,6 +173,8 @@ return {
       vim.lsp.enable("docker_compose_language_service")
       vim.lsp.enable("oxlint")
       vim.lsp.enable("oxfmt")
+      vim.lsp.enable("terraformls")
+      vim.lsp.enable("tflint")
     end,
   },
 }
