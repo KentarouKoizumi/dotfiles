@@ -23,6 +23,7 @@
     go-task
     xdg-utils
     uv
+    dust
 
     inotify-tools
 
