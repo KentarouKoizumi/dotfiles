@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of ke-koizumi";
+  description = "Home Manager configuration";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -13,11 +13,11 @@
   outputs =
     { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      params = import ./params.nix;
+      pkgs = nixpkgs.legacyPackages.${params.system};
     in
     {
-      homeConfigurations."ke-koizumi" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${params.username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
@@ -26,6 +26,9 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
+        extraSpecialArgs = {
+          inherit (params) username homeDirectory;
+        };
       };
     };
 }
