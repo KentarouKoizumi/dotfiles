@@ -7,6 +7,10 @@
 }:
 
 {
+  imports = [
+    ./wsl.nix
+  ];
+
   home.username = username;
   home.homeDirectory = homeDirectory;
 
@@ -30,8 +34,6 @@
     xdg-utils
     uv
     dust
-
-    inotify-tools
 
     dotnet-sdk_10
 
