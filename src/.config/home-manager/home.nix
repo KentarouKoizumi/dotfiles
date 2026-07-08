@@ -49,6 +49,7 @@
 
   home.sessionPath = [
     "$HOME/.bun/bin"
+    "$HOME/scripts"
   ];
 
   programs.home-manager.enable = true;
@@ -103,7 +104,6 @@
       g-skip-ls = "git ls-files -v | grep '^S' | cut -c3-";
       rmzone = "find . -type f -name \"*Zone.Identifier\" -delete";
       exp = "explorer.exe .";
-      sgc = "zellij --layout sgc attach --create sgc";
       zellij-kill = "zellij kill-all-sessions -y";
       zellij-delete = "zellij delete-all-sessions -y";
     };
