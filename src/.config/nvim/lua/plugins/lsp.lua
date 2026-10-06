@@ -13,6 +13,7 @@ return {
     opts = {
       ensure_installed = {
         "lua_ls",
+        "pyright",
         "oxlint",
         "oxfmt",
         "ts_ls",
@@ -124,6 +125,18 @@ return {
         },
       })
 
+      vim.lsp.config("pyright", {
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+            },
+          },
+        },
+      })
+
       vim.lsp.config("ts_ls", {
         capabilities = capabilities,
         settings = {
@@ -167,6 +180,7 @@ return {
       })
 
       vim.lsp.enable("lua_ls")
+      vim.lsp.enable("pyright")
       vim.lsp.enable("ts_ls")
       vim.lsp.enable("tailwindcss")
       vim.lsp.enable("csharp_ls")

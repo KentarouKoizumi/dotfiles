@@ -14,7 +14,10 @@
     { nixpkgs, home-manager, ... }:
     let
       params = import ./params.nix;
-      pkgs = nixpkgs.legacyPackages.${params.system};
+      pkgs = import nixpkgs {
+        system = params.system;
+        config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "drawio";
+      };
     in
     {
       homeConfigurations.${params.username} = home-manager.lib.homeManagerConfiguration {

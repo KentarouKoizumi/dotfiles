@@ -35,6 +35,8 @@
     uv
     dust
 
+    drawio
+
     dotnet-sdk_10
 
     direnv
@@ -50,6 +52,9 @@
   };
 
   home.sessionPath = [
+    "$HOME/.vite-plus/bin"
+    "$HOME/.nix-profile/bin"
+    "$HOME/.local/bin"
     "$HOME/.bun/bin"
     "$HOME/scripts"
   ];
@@ -104,7 +109,7 @@
       g-skip = "git update-index --skip-worktree";
       g-unskip = "git update-index --no-skip-worktree";
       g-skip-ls = "git ls-files -v | grep '^S' | cut -c3-";
-      rmzone = "find . -type f -name \"*Zone.Identifier\" -delete";
+      rmzone = "find . -type f -name \"*Zone.Identifier\" -delete -print";
       exp = "explorer.exe .";
       zellij-kill = "zellij kill-all-sessions -y";
       zellij-delete = "zellij delete-all-sessions -y";
@@ -113,6 +118,14 @@
 
   programs.bash = {
     enable = true;
+
+    profileExtra = ''
+
+      if [[ ":$PATH:" != *":${builtins.head config.home.sessionPath}:"* ]]; then
+        unset __HM_SESS_VARS_SOURCED
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+      fi
+    '';
 
     initExtra = ''
 
