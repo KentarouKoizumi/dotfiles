@@ -34,6 +34,7 @@
     xdg-utils
     uv
     dust
+    gcc
 
     drawio
 
