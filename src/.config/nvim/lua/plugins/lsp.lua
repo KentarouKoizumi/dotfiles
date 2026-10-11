@@ -1,30 +1,5 @@
 return {
   {
-    "mason-org/mason.nvim",
-    lazy = false,
-    opts = {},
-  },
-  {
-    "mason-org/mason-lspconfig.nvim",
-    dependencies = {
-      "mason-org/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    opts = {
-      ensure_installed = {
-        "lua_ls",
-        "pyright",
-        "oxlint",
-        "oxfmt",
-        "ts_ls",
-        "tailwindcss",
-        "csharp_ls",
-        "docker_compose_language_service",
-      },
-      automatic_enable = true,
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "saghen/blink.cmp"
@@ -186,7 +161,6 @@ return {
       vim.lsp.enable("csharp_ls")
       vim.lsp.enable("docker_compose_language_service")
       vim.lsp.enable("oxlint")
-      vim.lsp.enable("oxfmt")
       vim.lsp.enable("terraformls")
       vim.lsp.enable("tflint")
     end,
