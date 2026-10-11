@@ -13,7 +13,11 @@
   outputs =
     { nixpkgs, home-manager, ... }:
     let
-      params = import ./params.nix;
+      params =
+        if builtins.pathExists ./params.nix then
+          import ./params.nix
+        else
+          throw "Copy params.example.nix to params.nix and configure this environment; build with an explicit path: flake reference.";
       pkgs = import nixpkgs {
         system = params.system;
         config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "drawio";
@@ -28,8 +32,8 @@
     in
     {
       homeConfigurations = {
-        ${params.username} = mkHome [ ./wsl.nix ];
-        "${params.username}@nixos-t2" = mkHome [ ];
+        wsl = mkHome [ ./wsl.nix ];
+        nixos-t2 = mkHome [ ];
       };
     };
 }
