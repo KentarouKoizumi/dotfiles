@@ -18,20 +18,18 @@
         system = params.system;
         config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "drawio";
       };
-    in
-    {
-      homeConfigurations.${params.username} = home-manager.lib.homeManagerConfiguration {
+      mkHome = extraModules: home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        modules = [ ./home.nix ] ++ extraModules;
         extraSpecialArgs = {
           inherit (params) username homeDirectory;
         };
+      };
+    in
+    {
+      homeConfigurations = {
+        ${params.username} = mkHome [ ./wsl.nix ];
+        "${params.username}@nixos-t2" = mkHome [ ];
       };
     };
 }
