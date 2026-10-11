@@ -1,6 +1,7 @@
 # NixOS（T2） 向け初期設定
 
 Nix は導入済みなので、追加インストールは不要。NixOS 本体とは独立した Home Manager を設定する。
+Nix の `nix-command`・`flakes` を有効にしておく。
 
 ## clone と環境パラメータ
 
@@ -17,17 +18,16 @@ ${EDITOR:-vi} src/.config/home-manager/params.nix
 `params.nix` は汎用のサンプル値を Git 管理している。各環境で編集した値はコミットしない。
 Nix ストアにコピーされるため、秘密情報は書かない。
 
-## ビルドと反映
+## 初回の反映
 
 ```bash
-nix --extra-experimental-features 'nix-command flakes' build --no-update-lock-file './src/.config/home-manager#homeConfigurations.nixos-t2.activationPackage' && \
 bash script.sh && \
-HOME_MANAGER_BACKUP_EXT=backup ./result/activate
+nix run github:nix-community/home-manager -- switch -b backup
 ```
 
 WSL 専用設定は含まない。
 
-ビルド成功後に設定ファイルのリンク作成・反映を行う。既存の設定はバックアップされる。
+設定ファイルのリンクを作成してから、Home Manager がビルド・反映をまとめて行う。既存の設定はバックアップされる。
 ターミナルを再起動して fish が起動したら、初回のみ `tide configure` を実行する。
 
 ## 設定変更の反映
@@ -38,5 +38,3 @@ WSL 専用設定は含まない。
 ```bash
 home-manager switch
 ```
-
-Nix の `nix-command`・`flakes` は常時有効にしておく（初回ビルドのフラグはその実行時のみ有効）。
