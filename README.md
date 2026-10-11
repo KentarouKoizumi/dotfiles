@@ -2,30 +2,8 @@
 
 ## 初期設定
 
-各種設定ファイルのシンボリックリンクを作成
-```bash
-bash script.sh
-```
+- [WSL 向け手順](docs/setup-wsl.md)
+- [NixOS（T2）向け手順](docs/setup-nixos.md)
 
-nixのインストール（都度ドキュメント等を参照することを推奨します。）
-参考: https://github.com/NixOS/nix-installer
-```bash
-curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install --enable-flakes
-```
-
-terminal再起動してnixインストール確認
-```bash
-nix --version
-```
-
-home-manageで環境構築（シンボリックリンクで、正しい位置にflakesの設定ファイルが配置されているのでディレクトリ指定は不要）
-```bash
-nix run home-manager/master -- switch -b backup
-```
-
-terminal再起してfishが立ち上がることを確認し、tideの初期設定
-
-```fish
-tide configure
-```
-
+ユーザー名・ホームディレクトリ・アーキテクチャは clone 後に各環境の `params.nix` で設定する。
+LSP・oxfmt は共通の `lsp.nix` で管理するため、Mason でのインストールは不要。

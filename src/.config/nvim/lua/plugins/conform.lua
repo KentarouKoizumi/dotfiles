@@ -16,15 +16,6 @@ return {
                                                 return has_file(ctx, { "biome.json", "biome.jsonc" })
                                         end,
                                 },
-                                oxfmt = {
-                                        condition = function(_, ctx)
-                                                return has_file(ctx, {
-                                                        ".oxfmtrc.json",
-                                                        ".oxfmtrc.jsonc",
-                                                        "oxfmt.config.ts",
-                                                })
-                                        end,
-                                },
                         },
 
                         formatters_by_ft = {

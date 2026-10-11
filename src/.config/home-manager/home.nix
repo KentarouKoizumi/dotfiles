@@ -8,7 +8,7 @@
 
 {
   imports = [
-    ./wsl.nix
+    ./lsp.nix
   ];
 
   home.username = username;
@@ -79,7 +79,9 @@
     interactiveShellInit = ''
       eval (direnv hook fish)
 
-      source "$HOME/.vite-plus/env.fish"
+      if test -f "$HOME/.vite-plus/env.fish"
+        source "$HOME/.vite-plus/env.fish"
+      end
 
       set -g fish_key_bindings fish_vi_key_bindings
       set -g fish_sequence_key_delay_ms 200
@@ -110,8 +112,6 @@
       g-skip = "git update-index --skip-worktree";
       g-unskip = "git update-index --no-skip-worktree";
       g-skip-ls = "git ls-files -v | grep '^S' | cut -c3-";
-      rmzone = "find . -type f -name \"*Zone.Identifier\" -delete -print";
-      exp = "explorer.exe .";
       zellij-kill = "zellij kill-all-sessions -y";
       zellij-delete = "zellij delete-all-sessions -y";
     };
