@@ -12,5 +12,6 @@
     terraform-ls
     tflint
     oxfmt
+    cspell
   ];
 }
