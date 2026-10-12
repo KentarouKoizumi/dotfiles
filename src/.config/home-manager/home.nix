@@ -3,6 +3,8 @@
   pkgs,
   username,
   homeDirectory,
+  gitUserName,
+  gitUserEmail,
   ...
 }:
 
@@ -19,6 +21,7 @@
   home.packages = with pkgs; [
     git
     neovim
+    tmux
     nixfmt
     ripgrep
     zellij
@@ -35,6 +38,8 @@
     uv
     dust
     gcc
+    pnpm
+    nodejs
 
     drawio
 
@@ -137,5 +142,16 @@
         exec ${pkgs.fish}/bin/fish
       fi
     '';
+  };
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = gitUserName;
+        email = gitUserEmail;
+      };
+      push.autoSetupRemote = true;
+      init.defaultBranch = "main";
+    };
   };
 }

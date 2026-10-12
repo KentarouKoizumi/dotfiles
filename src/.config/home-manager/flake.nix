@@ -18,13 +18,20 @@
         system = params.system;
         config.allowUnfreePredicate = pkg: nixpkgs.lib.getName pkg == "drawio";
       };
-      mkHome = extraModules: home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ] ++ extraModules;
-        extraSpecialArgs = {
-          inherit (params) username homeDirectory;
+      mkHome =
+        extraModules:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ] ++ extraModules;
+          extraSpecialArgs = {
+            inherit (params)
+              username
+              homeDirectory
+              gitUserName
+              gitUserEmail
+              ;
+          };
         };
-      };
       profiles = {
         wsl = mkHome [ ./wsl.nix ];
         nixos-t2 = mkHome [ ];
@@ -33,8 +40,7 @@
     {
       homeConfigurations = profiles // {
         ${params.username} =
-          profiles.${params.environment}
-            or (throw "params.nix: environment must be wsl or nixos-t2");
+          profiles.${params.environment} or (throw "params.nix: environment must be wsl or nixos-t2");
       };
     };
 }
