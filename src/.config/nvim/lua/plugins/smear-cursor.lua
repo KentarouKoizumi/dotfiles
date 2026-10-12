@@ -1,32 +1,23 @@
 return {
   "sphamba/smear-cursor.nvim",
   opts = {
-    never_draw_over_target = true, -- if you want to actually see under the cursor
-    hide_target_hack = true,       -- same
-
-    stiffness = 0.6,
-    trailing_stiffness = 0.2,
-    damping = 0.5,
-    trailing_exponent = 5,
-    gradient_exponent = 0,
-
     cursor_color = "#adf7f5",
-    gamma = 2,
+    never_draw_over_target = true,
+    hide_target_hack = true,
 
-    particles_enabled = true,
-    particle_spread = 1,
-    particle_max_num = 100,
-    particles_per_second = 2,
-    particles_per_length = 20,
-    particle_max_lifetime = 500,
-    particle_lifetime_distribution_exponent = 1,
-    particle_max_initial_velocity = 100,
-    particle_velocity_from_cursor = 0,
-    particle_random_velocity = 100,
-    particle_damping = 0.30,
-    particle_gravity = 10,
-    particles_over_text = false,
+    -- A softer trail at roughly 60 fps, without particle rendering.
+    particles_enabled = false,
+    time_interval = 17,
+    stiffness = 0.65,
+    trailing_stiffness = 0.45,
+    damping = 0.85,
+    distance_stop_animating = 0.3,
 
-    min_distance_emit_particles = 0,
-  }
+    -- Keep typing responsive with a shorter insert-mode trail.
+    smear_insert_mode = true,
+    stiffness_insert_mode = 0.75,
+    trailing_stiffness_insert_mode = 0.65,
+    damping_insert_mode = 0.9,
+    smear_between_buffers = false,
+  },
 }
